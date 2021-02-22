@@ -4,12 +4,18 @@ import { useHistory } from "react-router-dom";
 
 interface SignInButtonProps {
   auth: firebase.auth.Auth;
+  textColor: string;
+  margin?: string;
 }
 
 const buttonClass =
-  "p-2 my-2 bg-blue-500 text-white rounded-md focus:outline-none focus:ring-2 ring-blue-300 ring-offset-2 mr-8";
+  "p-2 my-2 bg-orange rounded-md focus:outline-none focus:ring-2 ring-blue-300 ring-offset-2 mr-8 ";
 
-export const SignInButton: React.FC<SignInButtonProps> = ({ auth }) => {
+export const SignInButton: React.FC<SignInButtonProps> = ({
+  auth,
+  textColor,
+  margin = "mr-8",
+}) => {
   const history = useHistory();
   const signInWithGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -24,19 +30,19 @@ export const SignInButton: React.FC<SignInButtonProps> = ({ auth }) => {
   if (auth.currentUser) {
     return (
       <button
-        className={buttonClass}
+        className={buttonClass + textColor}
         onClick={() => {
           signOutWithGoogle();
         }}
       >
-        Sign Out
+        Logg ut
       </button>
     );
   }
 
   return (
     <button className={buttonClass} onClick={signInWithGoogle}>
-      Sign in with Google
+      Logg inn
     </button>
   );
 };
