@@ -12,6 +12,7 @@ import "tailwindcss/tailwind.css";
 import "./App.css";
 import { Header } from "./components/Header";
 import { SignInButton } from "./components/SignInButton";
+import { AuthRoute } from "./utils/AuthRoute";
 import { initializeFirebase } from "./utils/initializeFirebase";
 import { CalendarView } from "./views/CalendarView";
 
@@ -27,14 +28,21 @@ function App() {
       <div className="min-h-screen ...">
         <Header auth={auth} />
         <Switch>
-          <Route exact path="/">
-            <section className="min-h-screen min-w-full flex flex-col justify-center items-center">
-              <SignInButton auth={auth} textColor={""} />
-            </section>
-          </Route>
-          <Route path="/calendar">
-            <CalendarView auth={auth} firestore={firestore} />
-          </Route>
+          <AuthRoute
+            auth={auth}
+            children={
+              <>
+                <Route exact path="/">
+                  <section className="min-h-screen min-w-full flex flex-col justify-center items-center">
+                    <SignInButton auth={auth} textColor={""} />
+                  </section>
+                </Route>
+                <Route path="/calendar">
+                  <CalendarView auth={auth} firestore={firestore} />
+                </Route>
+              </>
+            }
+          ></AuthRoute>
         </Switch>
       </div>
     </Router>
