@@ -1,13 +1,7 @@
 import firebase from "firebase";
 import React from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-  useHistory,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import "./App.css";
 import { Header } from "./components/Header";
